@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BUILDING CONSTRUCTION ONE Sarlu | Entreprise de Construction à Kinshasa</title>
+<meta name="description" content="BUILDING CONSTRUCTION ONE Sarlu — Construction résidentielle, commerciale, génie civil et rénovation à Kinshasa. Devis gratuit sous 24h.">
+
+<!-- ============================================================ -->
+<!-- Google Fonts : Plus Jakarta Sans (titres) + Inter (corps)     -->
+<!-- ============================================================ -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<!-- Lucide Icons -->
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+<!-- GSAP + ScrollTrigger -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<style>
+/* ================================================================
+   0. DESIGN TOKENS
+   ================================================================ */
+:root{
+  --primary:#E8720C;         /* orange architectural / chantier   */
+  --primary-dark:#C25A08;
+  --primary-light:#FDBA74;
+  --secondary:#0F172A;       /* anthracite / béton profond        */
+  --secondary-soft:#1E293B;
+  --steel:#64748B;           /* gris structure                    */
+  --steel-light:#94A3B8;
+  --white:#FFFFFF;
+  --concrete:#F8FAFC;        /* gris béton clair                  */
+  --line:#E2E8F0;
+  --safety:#F59E0B;          /* jaune chantier (accents ponctuels)*/
+
+  --font-display:'Plus Jakarta Sans', sans-serif;
+  --font-body:'Inter', sans-serif;
+  --font-mono:'Space Mono', monospace;
+
+  --radius-sm:10px;
+  --radius-md:16px;
+  --radius-lg:28px;
+  --shadow-sm:0 2px 10px rgba(15,23,42,.06);
+  --shadow-md:0 12px 32px rgba(15,23,42,.10);
+  --shadow-lg:0 24px 60px rgba(15,23,42,.16);
+  --ease:cubic-bezier(.16,.84,.44,1);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:var(--font-body);
+  color:var(--secondary);
+  background:var(--white);
+  overflow-x:hidden;
+  line-height:1.6;
+}
+img{max-width:100%;display:block;}
+a{text-decoration:none;color:inherit;}
+ul{list-style:none;}
+button{font-family:inherit;cursor:pointer;border:none;background:none;}
+h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.12;letter-spacing:-.02em;color:var(--secondary);}
+.container{width:100%;max-width:1280px;margin:0 auto;padding:0 32px;}
+::selection{background:var(--primary);color:var(--white);}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;scroll-behavior:auto !important;}
+}
+
+/* Blueprint grid texture — signature motif used across the site */
+.blueprint-grid{
+  background-image:
+    linear-gradient(rgba(232,114,12,.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(232,114,12,.08) 1px, transparent 1px);
+  background-size:40px 40px;
+}
+.blueprint-grid-dark{
+  background-image:
+    linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+  background-size:40px 40px;
+}
+
+/* Angled section dividers — evoke roof pitches / scaffolding lines */
+.divider-cut{
+  position:relative;
+}
+.divider-cut svg{display:block;width:100%;height:auto;}
+
+/* Eyebrow / kicker label styled like a measuring-tape tag */
+.kicker{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  font-family:var(--font-mono);
+  font-size:12.5px;
+  font-weight:700;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--primary-dark);
+  background:#FFF3E7;
+  border:1px solid #FBD8AE;
+  padding:6px 14px 6px 10px;
+  border-radius:999px;
+}
+.kicker::before{
+  content:'';
+  width:7px;height:7px;border-radius:2px;
+  background:var(--primary);
+  transform:rotate(45deg);
+}
+.kicker.on-dark{
+  color:var(--primary-light);
+  background:rgba(232,114,12,.14);
+  border-color:rgba(232,114,12,.35);
+}
+
+/* Buttons */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  font-family:var(--font-display);font-weight:700;font-size:15px;
+  padding:16px 30px;border-radius:10px;
+  transition:transform .35s var(--ease), box-shadow .35s var(--ease), background .3s ease, color .3s ease;
+  white-space:nowrap;
+}
+.btn-primary{
+  background:var(--primary);color:var(--white);
+  box-shadow:0 10px 24px rgba(232,114,12,.35);
+}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 16px 32px rgba(232,114,12,.45);background:var(--primary-dark);}
+.btn-outline{
+  background:transparent;color:var(--white);
+  border:1.5px solid rgba(255,255,255,.5);
+}
+.btn-outline:hover{background:rgba(255,255,255,.12);border-color:var(--white);transform:translateY(-3px);}
+.btn-dark{
+  background:var(--secondary);color:var(--white);
+}
+.btn-dark:hover{background:var(--primary);transform:translateY(-3px);box-shadow:0 14px 30px rgba(232,114,12,.35);}
+.btn-sm{padding:12px 22px;font-size:13.5px;}
+
+/* ================================================================
+   1. HEADER / NAV
+   ================================================================ */
+.site-header{
+  position:fixed;top:0;left:0;width:100%;z-index:1000;
+  padding:22px 0;
+  transition:background .4s var(--ease), padding .4s var(--ease), box-shadow .4s var(--ease);
+}
+.site-header.scrolled{
+  background:rgba(15,23,42,.92);
+  backdrop-filter:blur(14px);
+  padding:14px 0;
+  box-shadow:0 8px 30px rgba(0,0,0,.25);
+}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;}
+.brand{display:flex;align-items:center;gap:12px;}
+.brand-mark{
+  width:44px;height:44px;border-radius:10px;
+  background:linear-gradient(135deg, var(--primary), #B8480A);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+  box-shadow:0 6px 18px rgba(232,114,12,.4);
+}
+.brand-mark svg{width:24px;height:24px;color:var(--white);}
+.brand-text{display:flex;flex-direction:column;line-height:1.15;}
+.brand-text b{font-family:var(--font-display);font-size:16.5px;font-weight:800;color:var(--white);letter-spacing:-.01em;}
+.brand-text span{font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;color:var(--primary-light);text-transform:uppercase;}
+
+.nav-links{display:flex;align-items:center;gap:36px;}
+.nav-links a{
+  font-size:14.5px;font-weight:600;color:rgba(255,255,255,.82);
+  position:relative;padding:4px 0;
+  transition:color .25s ease;
+}
+.nav-links a::after{
+  content:'';position:absolute;left:0;bottom:-2px;width:0;height:2px;background:var(--primary);
+  transition:width .3s var(--ease);
+}
+.nav-links a:hover{color:var(--white);}
+.nav-links a:hover::after{width:100%;}
+
+.nav-right{display:flex;align-items:center;gap:18px;}
+.burger{display:none;flex-direction:column;gap:5px;width:30px;z-index:1100;}
+.burger span{height:2px;width:100%;background:var(--white);border-radius:2px;transition:all .35s var(--ease);}
+.burger.active span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.burger.active span:nth-child(2){opacity:0;}
+.burger.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+.mobile-menu{
+  position:fixed;inset:0;background:var(--secondary);z-index:1050;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;
+  opacity:0;visibility:hidden;transform:translateY(-12px);
+  transition:opacity .4s var(--ease), transform .4s var(--ease), visibility .4s;
+}
+.mobile-menu.active{opacity:1;visibility:visible;transform:translateY(0);}
+.mobile-menu a{font-family:var(--font-display);font-size:26px;font-weight:700;color:var(--white);}
+.mobile-menu a:hover{color:var(--primary);}
+
+@media(max-width:960px){
+  .nav-links{display:none;}
+  .burger{display:flex;}
+  .nav-right .btn-primary{display:none;}
+}
+
+/* ================================================================
+   2. HERO
+   ================================================================ */
+.hero{
+  position:relative;min-height:100vh;display:flex;align-items:center;
+  background:var(--secondary);overflow:hidden;
+  padding-top:110px;
+}
+.hero-slides{position:absolute;inset:0;}
+.hero-slide{
+  position:absolute;inset:0;background-size:cover;background-position:center;
+  opacity:0;transition:opacity 1.8s ease;
+}
+.hero-slide.active{opacity:1;}
+.hero-overlay{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(180deg, rgba(9,13,23,.55) 0%, rgba(9,13,23,.72) 55%, rgba(9,13,23,.94) 100%),
+    linear-gradient(100deg, rgba(9,13,23,.65) 15%, rgba(9,13,23,.15) 60%);
+  z-index:1;
+}
+.hero-inner{position:relative;z-index:2;width:100%;}
+.hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:60px;align-items:end;}
+.hero-title{
+  font-size:clamp(38px, 5.4vw, 72px);
+  color:var(--white);
+  margin:22px 0 22px;
+}
+.hero-title em{
+  font-style:normal;color:var(--primary-light);
+  position:relative;
+}
+.hero-sub{
+  font-size:17.5px;color:rgba(255,255,255,.78);max-width:520px;margin-bottom:38px;font-weight:400;
+}
+.hero-cta-row{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:56px;}
+
+.hero-badge{
+  display:inline-flex;align-items:center;gap:10px;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);
+  padding:8px 16px;border-radius:999px;color:var(--white);font-size:13px;font-weight:600;
+  backdrop-filter:blur(6px);
+}
+.hero-badge svg{width:15px;height:15px;color:var(--primary-light);}
+
+.hero-stats{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+  border-top:1px solid rgba(255,255,255,.15);padding-top:32px;
+}
+.stat{padding-right:20px;}
+.stat b{
+  font-family:var(--font-display);font-size:clamp(28px,3vw,42px);color:var(--white);display:flex;align-items:baseline;gap:2px;
+}
+.stat b .plus{color:var(--primary-light);font-size:.65em;}
+.stat span{display:block;margin-top:6px;font-size:13px;color:rgba(255,255,255,.62);font-weight:500;}
+
+.hero-card{
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.16);
+  backdrop-filter:blur(14px);
+  border-radius:var(--radius-lg);
+  padding:32px;
+  color:var(--white);
+}
+.hero-card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:22px;}
+.hero-card-top svg{width:34px;height:34px;color:var(--primary-light);}
+.hero-card h4{color:var(--white);font-size:19px;margin-bottom:10px;}
+.hero-card p{font-size:14px;color:rgba(255,255,255,.65);margin-bottom:22px;}
+.hero-card-list{display:flex;flex-direction:column;gap:12px;}
+.hero-card-list li{display:flex;align-items:center;gap:10px;font-size:13.5px;color:rgba(255,255,255,.85);}
+.hero-card-list svg{width:16px;height:16px;color:var(--primary);flex-shrink:0;}
+
+.scroll-cue{
+  position:absolute;bottom:32px;left:50%;transform:translateX(-50%);z-index:3;
+  display:flex;flex-direction:column;align-items:center;gap:8px;color:rgba(255,255,255,.55);
+}
+.scroll-cue .line{width:1px;height:36px;background:linear-gradient(var(--primary), transparent);animation:scrollcue 2s ease infinite;}
+@keyframes scrollcue{0%{transform:scaleY(0);transform-origin:top;}50%{transform:scaleY(1);transform-origin:top;}51%{transform-origin:bottom;}100%{transform:scaleY(0);transform-origin:bottom;}}
+
+@media(max-width:960px){
+  .hero-grid{grid-template-columns:1fr;}
+  .hero-card{order:-1;}
+  .hero-stats{grid-template-columns:repeat(3,1fr);gap:14px;}
+}
+
+/* ================================================================
+   Generic section spacing
+   ================================================================ */
+.section{padding:130px 0;position:relative;}
+@media(max-width:768px){.section{padding:90px 0;}}
+.section-head{max-width:680px;margin-bottom:64px;}
+.section-head h2{font-size:clamp(30px,4vw,46px);margin-top:18px;}
+.section-head p{font-size:16.5px;color:var(--steel);margin-top:18px;line-height:1.7;}
+.section-head.center{margin-left:auto;margin-right:auto;text-align:center;}
+
+/* ================================================================
+   3. À PROPOS
+   ================================================================ */
+.about{background:var(--concrete);}
+.about-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:70px;align-items:center;}
+.about-media{position:relative;}
+.about-media-main{
+  border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-lg);
+  aspect-ratio:4/5;
+}
+.about-media-main img{width:100%;height:100%;object-fit:cover;}
+.about-media-tag{
+  position:absolute;bottom:-26px;left:-26px;
+  background:var(--secondary);color:var(--white);
+  border-radius:var(--radius-md);padding:22px 26px;
+  box-shadow:var(--shadow-lg);
+  display:flex;align-items:center;gap:16px;
+  max-width:250px;
+}
+.about-media-tag svg{width:30px;height:30px;color:var(--primary-light);flex-shrink:0;}
+.about-media-tag b{display:block;font-family:var(--font-display);font-size:15px;margin-bottom:3px;}
+.about-media-tag span{font-size:12.5px;color:var(--steel-light);}
+
+.about-copy p{color:var(--steel);font-size:16px;margin-bottom:18px;line-height:1.75;}
+.about-copy p:first-of-type{font-size:18px;color:var(--secondary);font-weight:500;}
+
+.values-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:36px;}
+.value-item{
+  background:var(--white);border:1px solid var(--line);border-radius:var(--radius-md);
+  padding:22px;transition:border-color .3s ease, transform .3s var(--ease), box-shadow .3s var(--ease);
+}
+.value-item:hover{border-color:var(--primary);transform:translateY(-4px);box-shadow:var(--shadow-md);}
+.value-item .v-icon{
+  width:42px;height:42px;border-radius:10px;background:#FFF3E7;display:flex;align-items:center;justify-content:center;margin-bottom:14px;
+}
+.value-item .v-icon svg{width:21px;height:21px;color:var(--primary);}
+.value-item b{font-family:var(--font-display);font-size:15px;display:block;margin-bottom:4px;}
+.value-item span{font-size:13px;color:var(--steel);line-height:1.5;}
+
+@media(max-width:900px){
+  .about-grid{grid-template-columns:1fr;gap:80px 0;}
+  .about-media-tag{position:relative;left:0;bottom:0;margin-top:22px;max-width:100%;}
+}
+
+/* ================================================================
+   4. SERVICES
+   ================================================================ */
+.services{background:var(--white);}
+.services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;}
+.service-card{
+  position:relative;
+  background:var(--secondary);
+  border-radius:var(--radius-md);
+  padding:34px 26px;
+  overflow:hidden;
+  min-height:340px;
+  display:flex;flex-direction:column;
+  transition:transform .45s var(--ease), box-shadow .45s var(--ease);
+}
+.service-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-lg);}
+.service-card .s-bg{
+  position:absolute;inset:0;background-size:cover;background-position:center;
+  opacity:.22;transition:opacity .45s ease, transform .6s ease;
+}
+.service-card:hover .s-bg{opacity:.34;transform:scale(1.06);}
+.service-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg, rgba(15,23,42,.4) 0%, rgba(15,23,42,.92) 100%);
+}
+.service-card > *{position:relative;z-index:1;}
+.service-num{font-family:var(--font-mono);font-size:12.5px;color:var(--primary-light);letter-spacing:.1em;margin-bottom:auto;}
+.s-icon{
+  width:52px;height:52px;border-radius:12px;
+  background:rgba(232,114,12,.16);border:1px solid rgba(232,114,12,.4);
+  display:flex;align-items:center;justify-content:center;margin:18px 0 18px;
+  transition:background .3s ease;
+}
+.service-card:hover .s-icon{background:var(--primary);}
+.s-icon svg{width:24px;height:24px;color:var(--primary-light);}
+.service-card:hover .s-icon svg{color:var(--white);}
+.service-card h3{color:var(--white);font-size:19px;margin-bottom:10px;}
+.service-card p{color:rgba(255,255,255,.62);font-size:13.8px;line-height:1.6;margin-bottom:18px;}
+.service-link{display:inline-flex;align-items:center;gap:6px;color:var(--primary-light);font-size:13.5px;font-weight:700;margin-top:auto;}
+.service-link svg{width:15px;height:15px;transition:transform .3s ease;}
+.service-card:hover .service-link svg{transform:translateX(4px);}
+
+@media(max-width:1100px){.services-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:560px){.services-grid{grid-template-columns:1fr;}}
+
+/* ================================================================
+   5. RÉALISATIONS / PORTFOLIO
+   ================================================================ */
+.portfolio{background:var(--concrete);}
+.filter-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:44px;}
+.filter-btn{
+  padding:11px 22px;border-radius:999px;font-size:13.5px;font-weight:700;
+  background:var(--white);border:1px solid var(--line);color:var(--steel);
+  transition:all .3s var(--ease);
+}
+.filter-btn:hover{border-color:var(--primary);color:var(--primary-dark);}
+.filter-btn.active{background:var(--secondary);color:var(--white);border-color:var(--secondary);}
+
+.projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+.project-card{
+  border-radius:var(--radius-md);overflow:hidden;position:relative;
+  aspect-ratio:4/5; box-shadow:var(--shadow-sm);
+  transition:transform .3s ease;
+}
+.project-card img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease);}
+.project-card:hover img{transform:scale(1.08);}
+.project-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(0deg, rgba(15,23,42,.92) 0%, rgba(15,23,42,.1) 55%, rgba(15,23,42,0) 100%);
+  display:flex;flex-direction:column;justify-content:flex-end;padding:26px;
+}
+.project-cat{
+  align-self:flex-start;
+  background:var(--primary);color:var(--white);font-size:11.5px;font-weight:700;
+  padding:5px 12px;border-radius:999px;margin-bottom:12px;text-transform:uppercase;letter-spacing:.05em;
+}
+.project-overlay h4{color:var(--white);font-size:19px;margin-bottom:4px;}
+.project-overlay span{color:rgba(255,255,255,.65);font-size:13px;}
+.project-card[data-hidden="true"]{display:none;}
+
+@media(max-width:960px){.projects-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:600px){.projects-grid{grid-template-columns:1fr;}}
+
+/* ================================================================
+   6. PROCESSUS
+   ================================================================ */
+.process{background:var(--secondary);color:var(--white);position:relative;}
+.process-list{display:flex;flex-direction:column;}
+.process-item{
+  display:grid;grid-template-columns:120px 1fr 240px;gap:32px;align-items:center;
+  padding:38px 0;border-top:1px solid rgba(255,255,255,.12);
+}
+.process-item:last-child{border-bottom:1px solid rgba(255,255,255,.12);}
+.process-num{font-family:var(--font-mono);font-size:44px;font-weight:700;color:rgba(255,255,255,.14);transition:color .4s ease;}
+.process-item:hover .process-num{color:var(--primary);}
+.process-text h3{color:var(--white);font-size:22px;margin-bottom:8px;}
+.process-text p{color:rgba(255,255,255,.6);font-size:14.5px;max-width:480px;}
+.process-icon{
+  justify-self:end;width:64px;height:64px;border-radius:16px;
+  background:rgba(232,114,12,.12);border:1px solid rgba(232,114,12,.3);
+  display:flex;align-items:center;justify-content:center;
+}
+.process-icon svg{width:28px;height:28px;color:var(--primary-light);}
+
+@media(max-width:760px){
+  .process-item{grid-template-columns:1fr;gap:14px;text-align:left;}
+  .process-icon{justify-self:start;}
+}
+
+/* ================================================================
+   7. DEVIS / CONTACT
+   ================================================================ */
+.contact{background:var(--white);}
+.contact-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:60px;}
+
+.contact-info{display:flex;flex-direction:column;gap:26px;}
+.info-card{
+  background:var(--concrete);border:1px solid var(--line);border-radius:var(--radius-md);
+  padding:24px;display:flex;gap:16px;align-items:flex-start;
+  transition:border-color .3s ease, transform .3s ease;
+}
+.info-card:hover{border-color:var(--primary);transform:translateX(4px);}
+.info-card .i-icon{
+  width:44px;height:44px;border-radius:10px;background:var(--secondary);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.info-card .i-icon svg{width:20px;height:20px;color:var(--primary-light);}
+.info-card b{display:block;font-family:var(--font-display);font-size:14.5px;margin-bottom:4px;}
+.info-card span, .info-card p{font-size:13.5px;color:var(--steel);line-height:1.6;}
+
+.form-wrap{
+  background:var(--concrete);border:1px solid var(--line);
+  border-radius:var(--radius-lg);padding:44px;
+}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px;}
+.field{display:flex;flex-direction:column;gap:8px;}
+.field label{font-size:13px;font-weight:700;color:var(--secondary);}
+.field input, .field select, .field textarea{
+  padding:14px 16px;border-radius:10px;border:1.5px solid var(--line);
+  font-family:var(--font-body);font-size:14.5px;background:var(--white);color:var(--secondary);
+  transition:border-color .25s ease, box-shadow .25s ease;
+}
+.field input:focus, .field select:focus, .field textarea:focus{
+  outline:none;border-color:var(--primary);box-shadow:0 0 0 4px rgba(232,114,12,.12);
+}
+.field textarea{resize:vertical;min-height:120px;}
+.form-submit{width:100%;margin-top:8px;}
+.form-note{font-size:12px;color:var(--steel-light);margin-top:14px;text-align:center;}
+
+.form-success{
+  display:none;text-align:center;padding:50px 20px;
+}
+.form-success.show{display:block;}
+.form-success .fs-icon{
+  width:68px;height:68px;border-radius:50%;background:#DCFCE7;
+  display:flex;align-items:center;justify-content:center;margin:0 auto 22px;
+}
+.form-success .fs-icon svg{width:32px;height:32px;color:#16A34A;}
+.form-success h3{font-size:22px;margin-bottom:10px;}
+.form-success p{color:var(--steel);font-size:14.5px;max-width:380px;margin:0 auto;}
+
+@media(max-width:960px){
+  .contact-grid{grid-template-columns:1fr;}
+  .form-wrap{padding:28px;}
+  .form-row{grid-template-columns:1fr;}
+}
+
+/* ================================================================
+   8. FOOTER
+   ================================================================ */
+.site-footer{background:#0B1220;color:rgba(255,255,255,.7);padding-top:90px;}
+.footer-grid{
+  display:grid;grid-template-columns:1.4fr .8fr .8fr 1fr;gap:50px;
+  padding-bottom:60px;border-bottom:1px solid rgba(255,255,255,.08);
+}
+.footer-brand p{font-size:13.8px;color:rgba(255,255,255,.5);margin:18px 0 24px;max-width:300px;line-height:1.7;}
+.footer-social{display:flex;gap:10px;}
+.footer-social a{
+  width:38px;height:38px;border-radius:9px;border:1px solid rgba(255,255,255,.14);
+  display:flex;align-items:center;justify-content:center;transition:all .3s ease;
+}
+.footer-social a:hover{background:var(--primary);border-color:var(--primary);transform:translateY(-3px);}
+.footer-social svg{width:17px;height:17px;}
+.footer-col h5{color:var(--white);font-family:var(--font-display);font-size:14px;margin-bottom:20px;letter-spacing:.02em;}
+.footer-col ul{display:flex;flex-direction:column;gap:12px;}
+.footer-col a{font-size:13.8px;color:rgba(255,255,255,.55);transition:color .25s ease;}
+.footer-col a:hover{color:var(--primary-light);}
+.footer-col .fc-contact{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:rgba(255,255,255,.55);margin-bottom:14px;}
+.footer-col .fc-contact svg{width:16px;height:16px;color:var(--primary);flex-shrink:0;margin-top:2px;}
+
+.footer-bottom{
+  padding:26px 0 34px;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;
+  font-size:12.8px;color:rgba(255,255,255,.4);
+}
+.footer-legal{display:flex;gap:20px;flex-wrap:wrap;}
+.footer-legal a{color:rgba(255,255,255,.4);}
+.footer-legal a:hover{color:var(--white);}
+
+.footer-signature{
+  text-align:center;padding:18px 0 26px;
+  border-top:1px solid rgba(255,255,255,.06);
+  font-size:12.5px;color:rgba(255,255,255,.35);
+}
+.footer-signature a{
+  color:var(--primary-light);font-weight:700;
+  border-bottom:1px solid rgba(232,114,12,.35);
+  padding-bottom:1px; transition:color .25s ease, border-color .25s ease;
+}
+.footer-signature a:hover{color:var(--white);border-color:var(--white);}
+
+@media(max-width:900px){
+  .footer-grid{grid-template-columns:1fr 1fr;gap:40px;}
+}
+@media(max-width:560px){
+  .footer-grid{grid-template-columns:1fr;}
+}
+
+/* Reveal-on-scroll base state (GSAP will animate to visible) */
+.reveal{opacity:0;}
+
+/* Back to top */
+.to-top{
+  position:fixed;bottom:28px;right:28px;z-index:900;
+  width:48px;height:48px;border-radius:50%;background:var(--secondary);color:var(--white);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:var(--shadow-md);
+  opacity:0;visibility:hidden;transform:translateY(10px);
+  transition:all .35s var(--ease);
+}
+.to-top.show{opacity:1;visibility:visible;transform:translateY(0);}
+.to-top:hover{background:var(--primary);}
+.to-top svg{width:20px;height:20px;}
+</style>
+</head>
+<body>
+
+<!-- =========================================================== -->
+<!-- HEADER                                                       -->
+<!-- =========================================================== -->
+<header class="site-header" id="siteHeader">
+  <div class="container nav-inner">
+    <a href="#home" class="brand">
+      <span class="brand-mark"><img src="images/Logo Building.png" alt=""></span>
+      <span class="brand-text">
+        <b>BUILDING CONSTRUCTION ONE</b>
+        <span>SARLU &nbsp;·&nbsp; KINSHASA</span>
+      </span>
+    </a>
+
+    <nav class="nav-links">
+      <a href="#home">Accueil</a>
+      <a href="#about">À Propos</a>
+      <a href="#services">Services</a>
+      <a href="#projects">Réalisations</a>
+      <a href="#process">Processus</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="nav-right">
+      <a href="#contact" class="btn btn-primary btn-sm">Demander un devis</a>
+      <button class="burger" id="burgerBtn" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile fullscreen menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#home" class="mobile-link">Accueil</a>
+  <a href="#about" class="mobile-link">À Propos</a>
+  <a href="#services" class="mobile-link">Services</a>
+  <a href="#projects" class="mobile-link">Réalisations</a>
+  <a href="#process" class="mobile-link">Processus</a>
+  <a href="#contact" class="mobile-link">Contact</a>
+  <a href="#contact" class="btn btn-primary" style="margin-top:10px;">Demander un devis</a>
+</div>
+
+<!-- =========================================================== -->
+<!-- HERO                                                         -->
+<!-- =========================================================== -->
+<section class="hero" id="home">
+
+  <!-- 🖼️ REMPLACER ICI : les 3 URLs Unsplash ci-dessous par vos photos de chantier réelles à Kinshasa -->
+  <div class="hero-slides" id="heroSlides">
+    <div class="hero-slide active" style="background-image:url('images/ekip1.jpg')"></div>
+    <div class="hero-slide" style="background-image:url('images/ekip2.jpg')"></div>
+    <div class="hero-slide" style="background-image:url('images/Ekip3.jpg')"></div>
+  </div>
+  <div class="hero-overlay"></div>
+
+  <div class="container hero-inner">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-badge">
+          <i data-lucide="map-pin"></i>
+          Basés à Kinshasa — RDC
+        </div>
+        <h1 class="hero-title">Construire Kinshasa <em>solidement</em>, dans les délais et selon les normes.</h1>
+        <p class="hero-sub">BUILDING CONSTRUCTION ONE Sarlu conçoit, bâtit et rénove vos résidences, commerces et infrastructures avec une exigence de qualité et de rigueur technique à chaque étape du chantier.</p>
+        <div class="hero-cta-row">
+          <a href="#projects" class="btn btn-primary">
+            <i data-lucide="hammer" style="width:17px;height:17px;"></i>
+            Découvrir nos projets
+          </a>
+          <a href="#contact" class="btn btn-outline">
+            <i data-lucide="file-text" style="width:17px;height:17px;"></i>
+            Demander un devis
+          </a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat">
+            <b data-count="120" class="count">0<span class="plus">+</span></b>
+            <span>Projets réalisés</span>
+          </div>
+          <div class="stat">
+            <b data-count="12" class="count">0<span class="plus">+</span></b>
+            <span>Années d'expérience</span>
+          </div>
+          <div class="stat">
+            <b data-count="98" class="count">0<span class="plus">%</span></b>
+            <span>Clients satisfaits</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="hero-card-top">
+          <i data-lucide="shield-check"></i>
+          <span class="kicker on-dark">Engagement qualité</span>
+        </div>
+        <h4>Un chantier, une promesse</h4>
+        <p>Chaque projet est encadré par nos ingénieurs et conducteurs de travaux, du premier plan à la remise des clés.</p>
+        <ul class="hero-card-list">
+          <li><i data-lucide="check-circle-2"></i> Devis détaillé sous 24 à 48h</li>
+          <li><i data-lucide="check-circle-2"></i> Matériaux contrôlés & normés</li>
+          <li><i data-lucide="check-circle-2"></i> Suivi de chantier transparent</li>
+          <li><i data-lucide="check-circle-2"></i> Délais contractuels respectés</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-cue">
+    <span class="line"></span>
+    <i data-lucide="mouse" style="width:16px;height:16px;"></i>
+  </div>
+</section>
+
+<!-- =========================================================== -->
+<!-- À PROPOS & VALEURS                                           -->
+<!-- =========================================================== -->
+<section class="section about" id="about">
+  <div class="container">
+    <div class="about-grid">
+
+      <div class="about-media reveal">
+        <div class="about-media-main">
+          <!-- 🖼️ REMPLACER ICI par une photo d'équipe / chantier de l'entreprise -->
+          <img src="images/Boss.jpg">
+        </div>
+        <div class="about-media-tag">
+          <i data-lucide="award"></i>
+          <div>
+            <b>Expertise BTP locale</b>
+            <span>Ingénieurs & maîtres d'œuvre formés aux normes en vigueur en RDC</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-copy">
+        <span class="kicker">Qui sommes-nous</span>
+        <h2>Une entreprise de construction pensée pour Kinshasa</h2>
+        <p>BUILDING CONSTRUCTION ONE Sarlu accompagne particuliers, promoteurs et entreprises dans la réalisation de leurs projets de construction à Kinshasa — de l'étude de terrain à la livraison clé en main.</p>
+        <p>Notre équipe pluridisciplinaire — ingénieurs, architectes partenaires, chefs de chantier et artisans qualifiés — s'engage sur des méthodes de travail rigoureuses, des matériaux durables et une communication claire avec chaque client, à chaque étape du projet.</p>
+
+        <div class="values-grid">
+          <div class="value-item">
+            <div class="v-icon"><i data-lucide="hard-hat"></i></div>
+            <b>Sécurité</b>
+            <span>Protocoles de sécurité stricts sur chaque chantier</span>
+          </div>
+          <div class="value-item">
+            <div class="v-icon"><i data-lucide="lightbulb"></i></div>
+            <b>Innovation</b>
+            <span>Méthodes et matériaux modernes, adaptés au climat local</span>
+          </div>
+          <div class="value-item">
+            <div class="v-icon"><i data-lucide="clock"></i></div>
+            <b>Délais garantis</b>
+            <span>Planning de chantier suivi et communiqué en continu</span>
+          </div>
+          <div class="value-item">
+            <div class="v-icon"><i data-lucide="gem"></i></div>
+            <b>Qualité des matériaux</b>
+            <span>Fournisseurs contrôlés et matériaux durables</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================== -->
+<!-- SERVICES                                                     -->
+<!-- =========================================================== -->
+<section class="section services" id="services">
+  <div class="container">
+    <div class="section-head center">
+      <span class="kicker">Nos services</span>
+      <h2>Un savoir-faire complet, du gros œuvre à la finition</h2>
+      <p>De la construction neuve à la rénovation, nous couvrons l'ensemble des corps de métier nécessaires à la réussite de votre projet.</p>
+    </div>
+
+    <div class="services-grid">
+
+      <div class="service-card reveal">
+        <div class="s-bg" style="background-image:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop')"></div>
+        <span class="service-num">01</span>
+        <div class="s-icon"><i data-lucide="home"></i></div>
+        <h3>Construction Résidentielle & Commerciale</h3>
+        <p>Maisons, villas, immeubles et locaux commerciaux conçus et construits selon vos besoins et votre budget.</p>
+        <span class="service-link">En savoir plus <i data-lucide="arrow-right"></i></span>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="s-bg" style="background-image:url('https://images.unsplash.com/photo-1416331108676-a22ccb276e35?q=80&w=800&auto=format&fit=crop')"></div>
+        <span class="service-num">02</span>
+        <div class="s-icon"><i data-lucide="paint-roller"></i></div>
+        <h3>Rénovation & Aménagement</h3>
+        <p>Réhabilitation, extension et aménagement intérieur pour moderniser et valoriser vos espaces existants.</p>
+        <span class="service-link">En savoir plus <i data-lucide="arrow-right"></i></span>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="s-bg" style="background-image:url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=800&auto=format&fit=crop')"></div>
+        <span class="service-num">03</span>
+        <div class="s-icon"><i data-lucide="construction"></i></div>
+        <h3>Génie Civil, Gros Œuvre & Infrastructures</h3>
+        <p>Fondations, terrassement, voiries et ouvrages d'infrastructure exécutés avec rigueur technique.</p>
+        <span class="service-link">En savoir plus <i data-lucide="arrow-right"></i></span>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="s-bg" style="background-image:url('https://images.unsplash.com/photo-1454165833767-027fee80abb8?q=80&w=800&auto=format&fit=crop')"></div>
+        <span class="service-num">04</span>
+        <div class="s-icon"><i data-lucide="clipboard-check"></i></div>
+        <h3>Gestion de Projet & Expertise BTP</h3>
+        <p>Pilotage complet du chantier : études, budgets, plannings, coordination des corps de métier et contrôle qualité.</p>
+        <span class="service-link">En savoir plus <i data-lucide="arrow-right"></i></span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================== -->
+<!-- RÉALISATIONS / PORTFOLIO                                     -->
+<!-- =========================================================== -->
+<section class="section portfolio" id="projects">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">Portfolio</span>
+      <h2>Nos réalisations à Kinshasa</h2>
+      <p>Un aperçu de nos projets livrés — résidentiels, commerciaux et rénovations — à travers les communes de Kinshasa.</p>
+    </div>
+
+    <div class="filter-row" id="filterRow">
+      <button class="filter-btn active" data-filter="all">Tous</button>
+      <button class="filter-btn" data-filter="residentiel">Résidentiel</button>
+      <button class="filter-btn" data-filter="commercial">Commercial</button>
+      <button class="filter-btn" data-filter="renovation">Rénovation</button>
+    </div>
+
+    <!-- 🖼️ REMPLACER les images ci-dessous par des photos réelles de vos chantiers livrés -->
+    <div class="projects-grid" id="projectsGrid">
+
+      <div class="project-card reveal" data-cat="residentiel">
+        <img src="images/eglise terre de grace.jpg">
+        <div class="project-overlay">
+          <span class="project-cat">Infrastructure</span>
+          <h4>Eglise Terre de Grâce Tshangu</h4>
+          <span>Construction neuve — concession complète</span>
+        </div>
+      </div>
+
+      <div class="project-card reveal" data-cat="Residence">
+        <img src="images/R3.jpg">
+        <div class="project-overlay">
+          <span class="project-cat">Residence</span>
+          <h4>Residence à Petro Congo</h4>
+          <span>Une residence — 3 niveaux</span>
+        </div>
+      </div>
+
+      <div class="project-card reveal" data-cat="renovation">
+        <img src="images/rehabilitation.jpg">
+        <div class="project-overlay">
+          <span class="project-cat">Rénovation</span>
+          <h4>Réhabilitation Limete</h4>
+          <span>Rénovation Resisdence complète </span>
+        </div>
+      </div>
+
+      <div class="project-card reveal" data-cat="residentiel">
+        <img src="images/residencee.jpg">
+        <div class="project-overlay">
+          <span class="project-cat">Résidentiel</span>
+          <h4>Résidence Kintambo</h4>
+          <span>Construction neuve — 280 m²</span>
+        </div>
+      </div>
+
+      <div class="project-card reveal" data-cat="commercial">
+        <img src="images/ekip2.jpg">
+        <div class="project-overlay">
+          <span class="project-cat">Commercial</span>
+          <h4>Terrasse Haut Cadre</h4>
+          <span>Infrastructure </span>
+        </div>
+      </div>
+
+      <div class="project-card reveal" data-cat="renovation">
+        <img src="images/Amenage.jpg">
+        <div class="project-overlay">
+          <span class="project-cat">Rénovation</span>
+          <h4>Residence Amenagée</h4>
+          <span>Aménagement intérieur — 90 m²</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================== -->
+<!-- PROCESSUS DE TRAVAIL                                         -->
+<!-- =========================================================== -->
+<section class="section process blueprint-grid-dark" id="process">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker on-dark">Notre méthode</span>
+      <h2 style="color:#fff;">Comment se déroule votre projet</h2>
+      <p style="color:rgba(255,255,255,.55);">Quatre étapes claires, du premier contact à la remise des clés de votre chantier.</p>
+    </div>
+
+    <div class="process-list">
+      <div class="process-item reveal">
+        <span class="process-num">01</span>
+        <div class="process-text">
+          <h3>Étude & Devis</h3>
+          <p>Visite du terrain, analyse de vos besoins et remise d'un devis détaillé et transparent.</p>
+        </div>
+        <div class="process-icon"><i data-lucide="search"></i></div>
+      </div>
+      <div class="process-item reveal">
+        <span class="process-num">02</span>
+        <div class="process-text">
+          <h3>Conception</h3>
+          <p>Élaboration des plans, choix des matériaux et validation du budget et du planning avec vous.</p>
+        </div>
+        <div class="process-icon"><i data-lucide="ruler"></i></div>
+      </div>
+      <div class="process-item reveal">
+        <span class="process-num">03</span>
+        <div class="process-text">
+          <h3>Exécution des travaux</h3>
+          <p>Réalisation du chantier par nos équipes, avec suivi régulier et contrôle qualité à chaque phase.</p>
+        </div>
+        <div class="process-icon"><i data-lucide="hammer"></i></div>
+      </div>
+      <div class="process-item reveal">
+        <span class="process-num">04</span>
+        <div class="process-text">
+          <h3>Livraison</h3>
+          <p>Réception des travaux, vérifications finales et remise des clés de votre ouvrage terminé.</p>
+        </div>
+        <div class="process-icon"><i data-lucide="key-round"></i></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================== -->
+<!-- DEVIS / CONTACT                                              -->
+<!-- =========================================================== -->
+<section class="section contact" id="contact">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">Contact</span>
+      <h2>Demandez votre devis gratuit</h2>
+      <p>Décrivez-nous votre projet : nous revenons vers vous sous 24 à 48h avec une première estimation.</p>
+    </div>
+
+    <div class="contact-grid">
+
+      <div class="contact-info">
+        <div class="info-card reveal">
+          <div class="i-icon"><i data-lucide="map-pin"></i></div>
+          <div>
+            <b>Adresse</b>
+            <!-- ✏️ REMPLACER par l'adresse exacte de l'entreprise -->
+            <span>Avenue Lunda, Numéro 13, Quartier III, Commune de Masina, Kinshasa — RDC</span>
+          </div>
+        </div>
+        <div class="info-card reveal">
+          <div class="i-icon"><i data-lucide="phone"></i></div>
+          <div>
+            <b>Téléphone / WhatsApp</b>
+            <!-- ✏️ REMPLACER par le numéro réel de l'entreprise -->
+            <span>+243 820 841 783</span>
+          </div>
+        </div>
+        <div class="info-card reveal">
+          <div class="i-icon"><i data-lucide="mail"></i></div>
+          <div>
+            <b>Email</b>
+            <!-- ✏️ REMPLACER par l'email réel de l'entreprise -->
+            <span>andrebosco335@gmail.com</span>
+          </div>
+        </div>
+        <div class="info-card reveal">
+          <div class="i-icon"><i data-lucide="clock"></i></div>
+          <div>
+            <b>Horaires d'ouverture</b>
+            <span>Lun – Ven : 7h30 – 17h00<br>Sam : 8h00 – 13h00</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-wrap reveal">
+        <form id="quoteForm">
+          <div class="form-row">
+            <div class="field">
+              <label for="fname">Nom complet *</label>
+              <input type="text" id="fname" name="fname" placeholder="Votre nom" required>
+            </div>
+            <div class="field">
+              <label for="fphone">Téléphone *</label>
+              <input type="tel" id="fphone" name="fphone" placeholder="+243 ..." required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label for="femail">Email *</label>
+              <input type="email" id="femail" name="femail" placeholder="vous@email.com" required>
+            </div>
+            <div class="field">
+              <label for="ftype">Type de projet *</label>
+              <select id="ftype" name="ftype" required>
+                <option value="" disabled selected>Sélectionnez...</option>
+                <option value="residentiel">Construction résidentielle</option>
+                <option value="commercial">Construction commerciale</option>
+                <option value="renovation">Rénovation & aménagement</option>
+                <option value="genie-civil">Génie civil / infrastructures</option>
+                <option value="autre">Autre</option>
+              </select>
+            </div>
+          </div>
+          <div class="field" style="margin-bottom:22px;">
+            <label for="fmessage">Décrivez votre projet *</label>
+            <textarea id="fmessage" name="fmessage" placeholder="Localisation, surface, budget estimé, délai souhaité..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-dark form-submit">
+            <i data-lucide="send" style="width:17px;height:17px;"></i>
+            Envoyer ma demande de devis
+          </button>
+          <p class="form-note">En soumettant ce formulaire, vous acceptez d'être recontacté par notre équipe.</p>
+        </form>
+
+        <div class="form-success" id="formSuccess">
+          <div class="fs-icon"><i data-lucide="check"></i></div>
+          <h3>Demande envoyée avec succès !</h3>
+          <p>Merci pour votre confiance. Notre équipe étudie votre projet et vous recontacte sous 24 à 48h.</p>
+          <button class="btn btn-outline" style="color:var(--secondary);border-color:var(--line);margin-top:24px;" id="resetForm">Envoyer une autre demande</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================== -->
+<!-- FOOTER                                                       -->
+<!-- =========================================================== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+
+      <div class="footer-brand">
+        <a href="#home" class="brand">
+          <span class="brand-mark"><i data-lucide="hard-hat"></i></span>
+          <span class="brand-text">
+            <b>BUILDING CONSTRUCTION ONE</b>
+            <span>SARLU · KINSHASA</span>
+          </span>
+        </a>
+        <p>Entreprise de construction basée à Kinshasa, spécialisée en construction résidentielle, commerciale, génie civil et rénovation.</p>
+        <div class="footer-social">
+          <!-- ✏️ REMPLACER par les liens réseaux sociaux réels -->
+          <a href="#" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+          <a href="#" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+          <a href="#" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+          <a href="https://wa.me/243820841783" aria-label="WhatsApp"><i data-lucide="message-circle"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h5>Navigation</h5>
+        <ul>
+          <li><a href="#home">Accueil</a></li>
+          <li><a href="#about">À Propos</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#projects">Réalisations</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5>Services</h5>
+        <ul>
+          <li><a href="#services">Construction résidentielle</a></li>
+          <li><a href="#services">Construction commerciale</a></li>
+          <li><a href="#services">Rénovation & aménagement</a></li>
+          <li><a href="#services">Génie civil</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <div class="fc-contact">
+          <i data-lucide="map-pin"></i>
+          <span>Avenue du Commerce, Gombe, Kinshasa — RDC</span>
+        </div>
+        <div class="fc-contact">
+          <i data-lucide="phone"></i>
+          <span>+243 820 841 783</span>
+        </div>
+        <div class="fc-contact">
+          <i data-lucide="mail"></i>
+          <span>andrebosco335@gmail.com</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> BUILDING CONSTRUCTION ONE Sarlu. Tous droits réservés.</span>
+      <div class="footer-legal">
+        <a href="#">Mentions légales</a>
+        <a href="#">Politique de confidentialité</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-signature">
+    Conçu et développé avec passion par <a href="https://www.linkedin.com/in/exauce-nduka" target="_blank" rel="noopener">Axion Tech</a>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" aria-label="Retour en haut">
+  <i data-lucide="arrow-up"></i>
+</button>
+
+<!-- =========================================================== -->
+<!-- SCRIPT                                                       -->
+<!-- =========================================================== -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  lucide.createIcons();
+  gsap.registerPlugin(ScrollTrigger);
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* ---------- Header on scroll ---------- */
+  const header = document.getElementById('siteHeader');
+  const toTop = document.getElementById('toTop');
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    header.classList.toggle('scrolled', y > 60);
+    toTop.classList.toggle('show', y > 600);
+  });
+
+  /* ---------- Mobile menu ---------- */
+  const burger = document.getElementById('burgerBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  burger.addEventListener('click', () => {
+    burger.classList.toggle('active');
+    mobileMenu.classList.toggle('active');
+  });
+  document.querySelectorAll('.mobile-menu a').forEach(a => {
+    a.addEventListener('click', () => {
+      burger.classList.remove('active');
+      mobileMenu.classList.remove('active');
+    });
+  });
+
+  /* ---------- Back to top ---------- */
+  toTop.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+
+  /* ---------- Hero slideshow ---------- */
+  const slides = document.querySelectorAll('.hero-slide');
+  let slideIdx = 0;
+  setInterval(() => {
+    slides[slideIdx].classList.remove('active');
+    slideIdx = (slideIdx + 1) % slides.length;
+    slides[slideIdx].classList.add('active');
+  }, 6000);
+
+  /* ---------- Animated stat counters ---------- */
+  const counters = document.querySelectorAll('.count');
+  counters.forEach(counter => {
+    const target = +counter.getAttribute('data-count');
+    const suffixEl = counter.querySelector('.plus');
+    const suffix = suffixEl ? suffixEl.outerHTML : '';
+    ScrollTrigger.create({
+      trigger: counter,
+      start: 'top 90%',
+      once: true,
+      onEnter: () => {
+        let obj = {val:0};
+        gsap.to(obj, {
+          val: target,
+          duration: 2.1,
+          ease: 'power2.out',
+          onUpdate: () => { counter.innerHTML = Math.floor(obj.val) + suffix; },
+          onComplete: () => { counter.innerHTML = target + suffix; }
+        });
+      }
+    });
+  });
+
+  /* ---------- Hero load-in sequence ---------- */
+  gsap.from('.hero-badge', {opacity:0, y:16, duration:.8, delay:.2, ease:'power3.out'});
+  gsap.from('.hero-title', {opacity:0, y:26, duration:1, delay:.35, ease:'power3.out'});
+  gsap.from('.hero-sub', {opacity:0, y:20, duration:.9, delay:.55, ease:'power3.out'});
+  gsap.from('.hero-cta-row', {opacity:0, y:20, duration:.9, delay:.7, ease:'power3.out'});
+  gsap.from('.hero-stats .stat', {opacity:0, y:16, duration:.8, delay:.9, stagger:.12, ease:'power3.out'});
+  gsap.from('.hero-card', {opacity:0, x:30, duration:1, delay:.5, ease:'power3.out'});
+
+  /* ---------- Scroll-triggered reveals ---------- */
+  document.querySelectorAll('.reveal').forEach((el) => {
+    gsap.fromTo(el, {opacity:0, y:36}, {
+      opacity:1, y:0, duration:.9, ease:'power3.out',
+      scrollTrigger:{trigger:el, start:'top 88%'}
+    });
+  });
+
+  gsap.utils.toArray('.services-grid .service-card').forEach((card, i) => {
+    gsap.fromTo(card, {opacity:0, y:50}, {
+      opacity:1, y:0, duration:.8, delay:(i%4)*.08, ease:'power3.out',
+      scrollTrigger:{trigger:card, start:'top 90%'}
+    });
+  });
+
+  gsap.utils.toArray('.process-item').forEach((item, i) => {
+    gsap.fromTo(item, {opacity:0, x:-30}, {
+      opacity:1, x:0, duration:.8, delay:i*.08, ease:'power3.out',
+      scrollTrigger:{trigger:item, start:'top 90%'}
+    });
+  });
+
+  gsap.utils.toArray('.section-head').forEach(el => {
+    gsap.fromTo(el, {opacity:0, y:24}, {
+      opacity:1, y:0, duration:.9, ease:'power3.out',
+      scrollTrigger:{trigger:el, start:'top 88%'}
+    });
+  });
+
+  /* ---------- Portfolio filter ---------- */
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const projectCards = document.querySelectorAll('.project-card');
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.getAttribute('data-filter');
+      projectCards.forEach(card => {
+        const match = filter === 'all' || card.getAttribute('data-cat') === filter;
+        if (match) {
+          card.removeAttribute('data-hidden');
+          gsap.fromTo(card, {opacity:0, scale:.92}, {opacity:1, scale:1, duration:.5, ease:'power2.out'});
+        } else {
+          card.setAttribute('data-hidden','true');
+        }
+      });
+    });
+  });
+
+  /* ---------- Quote form (simulated submission) ---------- */
+  const form = document.getElementById('quoteForm');
+  const successBox = document.getElementById('formSuccess');
+  const resetBtn = document.getElementById('resetForm');
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    // Validation basique déjà assurée par les attributs "required" HTML5.
+    // Ici : simulation d'un envoi réussi (à remplacer par un vrai appel API / backend).
+    form.style.display = 'none';
+    successBox.classList.add('show');
+    gsap.fromTo(successBox, {opacity:0, y:14}, {opacity:1, y:0, duration:.6, ease:'power3.out'});
+  });
+
+  resetBtn.addEventListener('click', () => {
+    form.reset();
+    successBox.classList.remove('show');
+    form.style.display = 'block';
+  });
+
+  /* ---------- Smooth anchor scroll offset for fixed header ---------- */
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const targetId = this.getAttribute('href');
+      if (targetId.length > 1) {
+        const target = document.querySelector(targetId);
+        if (target) {
+          e.preventDefault();
+          const offset = 90;
+          const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+          window.scrollTo({top, behavior:'smooth'});
+        }
+      }
+    });
+  });
+
+});
+</script>
+</body>
+</html>
